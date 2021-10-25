@@ -1,7 +1,7 @@
 import 'client.dart';
 
 class Service {
-  final Client client;
+  final ProfactoClient client;
 
   const Service(this.client);
 }

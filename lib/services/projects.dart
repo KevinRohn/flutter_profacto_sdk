@@ -1,21 +1,36 @@
 part of flutter_profacto_sdk;
 
 class Projects extends Service {
-  Projects(Client client) : super(client);
+  Projects(ProfactoClient client) : super(client);
 
   late String _token;
 
+  /// Set token with 'Projects' rights
+  ///
+  /// See documentation: https://conf.extragroup.de/display/handbuch/API+-+Projekte
   Projects setProjectsToken(String token) {
     _token = token;
     return this;
   }
 
-  Future<void> getTable() async {
+  /// Get Project related data
+  ///
+  /// The method returns data from a given table, which is related to the 'projects' API.
+  ///
+  /// Allowed tables are defined in the [table] enum.
+  /// Use a comma separated list for the selected [fields]. (e.g: 'AuftragsNr,Bauvorhaben').
+  ///
+  Future<void> getProjectData({
+    required ProjectTable table,
+    required String fields,
+    String? query,
+  }) async {
     final String path = '/api_get?/';
 
     final Map<String, dynamic> params = {
-      'table': 'Auftrag',
-      'fields': 'AuftragsNr',
+      'table': EnumToString.convertToString(table),
+      'fields': fields,
+      'query': query,
       'token': _token,
     };
 
