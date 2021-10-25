@@ -34,7 +34,7 @@ dependencies:
   flutter_profacto_sdk:
     git:
       url: https://github.com/KevinRohn/flutter_profacto_sdk
-      ref: main
+      ref: master
 ```
 
 Use `ref` to choose the branch or tag you want to use.
