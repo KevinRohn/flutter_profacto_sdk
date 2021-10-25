@@ -24,13 +24,17 @@ class Projects extends Service {
     required ProjectTable table,
     required String fields,
     String? query,
+    int? limit,
+    int? offset,
   }) async {
-    final String path = '/api_get?/';
+    const String path = '/api_get?/';
 
     final Map<String, dynamic> params = {
       'table': EnumToString.convertToString(table),
       'fields': fields,
       'query': query,
+      'limit': (limit == null) ? 0 : limit,
+      'offset': (limit == null) ? 0 : offset,
       'token': _token,
     };
 
