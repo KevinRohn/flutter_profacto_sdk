@@ -95,23 +95,23 @@ profacto provides a list for the categorys of the tokens.
 
 ## Reference
 
-### ['API - Dateien'](https://conf.extragroup.de/display/handbuch/API+-+Dateien)
-
-### ['API - Kunden'](https://conf.extragroup.de/display/handbuch/API+-+Kunden)
-### ['API - Projekte'](https://conf.extragroup.de/display/handbuch/API+-+Projekte)
+### API - Projekte
 
 - Requires API-token `"Projekte"`
+- Documentation link profacto - [API - Projekte](https://conf.extragroup.de/display/handbuch/API+-+Projekte)
 
-| API call                      |       State        | Description                                |
-| :---------------------------- | :----------------: | :----------------------------------------- |
-| 'api_get'                     | :white_check_mark: |  |
-| 'api_get_qr'                  |        :x:         |    |
-| 'api_put_project'             |        :x:         |    |
-| 'api_put_projectpos'          |        :x:         |    |
-| 'api_getposdelta'             |        :x:         |     |
-| 'api_get_project_doccopylist' |        :x:         |    |
-| 'api_get_project_filelist'    |        :x:         |    |
+| API call                      |       State        | Description |
+| :---------------------------- | :----------------: | :---------- |
+| 'api_get'                     | :white_check_mark: |             |
+| 'api_get_qr'                  |        :x:         |             |
+| 'api_put_project'             |        :x:         |             |
+| 'api_put_projectpos'          |        :x:         |             |
+| 'api_getposdelta'             |        :x:         |             |
+| 'api_get_project_doccopylist' |        :x:         |             |
+| 'api_get_project_filelist'    |        :x:         |             |
 
+### ['API - Dateien'](https://conf.extragroup.de/display/handbuch/API+-+Dateien)
+### ['API - Kunden'](https://conf.extragroup.de/display/handbuch/API+-+Kunden)
 ### ['API - Produktion'](https://conf.extragroup.de/display/handbuch/API+-+Produktion)
 ### ['API - Allgemein'](https://conf.extragroup.de/display/handbuch/API+-+Allgemein)
 ### ['API - Artikel'](https://conf.extragroup.de/display/handbuch/API+-+Artikel)
