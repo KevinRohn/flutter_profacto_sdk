@@ -1,4 +1,4 @@
-# profacto flutter SDK (Unofficial)
+# profacto flutter SDK (unofficial)
 
 The 'flutter_profacto_sdk' is an unofficial SDK for the profacto API.
 It can be used to build flutter applications with profacto to improve business processes.
@@ -55,7 +55,7 @@ client.setEndpoint('http://<server-url>:<server-port>/4DAction');
 - replace `<server-port>` with the port of the profacto server
 
 
-Get project data:
+Get project data with specific query and with predefined fields:
 ```dart
 
 Projects projects = Projects(client);
@@ -65,6 +65,19 @@ projects.getProjectData(
     table: ProjectTable.Auftrag,
     fields: 'AuftragsNr,Bauvorhaben',
     query: 'AuftragsNr=0000'); // get "Auftrag" by `"AuftragsNr"`
+  
+```
+
+Get all projects with predefined fields:
+```dart
+
+Projects projects = Projects(client);
+projects.setProjectsToken('<token>');
+
+projects.getProjectData(
+    table: ProjectTable.Auftrag,
+    fields: 'AuftragsNr,Bauvorhaben'
+    ); 
   
 ```
 
