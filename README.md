@@ -13,7 +13,7 @@ So the naming of some variables have been adopted from the database structure...
 
 This library is actively developed alongside production apps.
 
-Having trouble adapting to the latest API? Please open an issue.
+Having trouble adapting to the latest SDK? Please open an issue.
 
 **Please be fully prepared to deal with breaking changes.**
 
