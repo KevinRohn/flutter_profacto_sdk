@@ -10,11 +10,7 @@ import 'exception.dart';
 import 'interceptor.dart';
 import 'response.dart';
 
-ClientBase createClient({
-  required String endPoint,
-  required bool selfSigned,
-  required String token,
-}) =>
+ClientBase createClient({required String endPoint, required bool selfSigned}) =>
     ClientIO(
       endPoint: endPoint,
       selfSigned: selfSigned,
@@ -22,7 +18,6 @@ ClientBase createClient({
 
 class ClientIO extends ClientBase with ClientMixin {
   String _endPoint;
-  late String _token;
   Map<String, String>? _headers;
   late Map<String, String> config;
   bool selfSigned;
@@ -34,47 +29,44 @@ class ClientIO extends ClientBase with ClientMixin {
   bool get initialized => _initialized;
 
   ClientIO(
-      {String endPoint = 'https://appwrite.io/v1',
-      this.selfSigned = false,
-      String token = 'ABC'})
+      {String endPoint = 'https://myServer.de:8080/4DAction/',
+      this.selfSigned = false})
       : _endPoint = endPoint {
     _nativeClient = new HttpClient()
       ..badCertificateCallback =
           ((X509Certificate cert, String host, int port) => selfSigned);
     _httpClient = new IOClient(_nativeClient);
-    this._headers = {
+    _headers = {
       'content-type': 'application/json',
       'x-sdk-version': 'profacto:flutter:2.0.3',
       'X-Profacto-Response-Format': '0.11.0',
     };
 
-    this.config = {};
+    config = {};
 
     assert(_endPoint.startsWith(RegExp("http://|https://")),
         "endPoint $_endPoint must start with 'http'");
     init();
   }
 
+  @override
   String get endPoint => _endPoint;
 
+  @override
   ClientIO setSelfSigned({bool status = true}) {
-    this.selfSigned = status;
+    selfSigned = status;
     _nativeClient.badCertificateCallback =
         ((X509Certificate cert, String host, int port) => status);
     return this;
   }
 
+  @override
   ClientIO setEndpoint(String endPoint) {
-    this._endPoint = endPoint;
+    _endPoint = endPoint;
     return this;
   }
 
-  ClientIO setToken(String token) {
-    this._token = token;
-    print(token);
-    return this;
-  }
-
+  @override
   ClientIO addHeader(String key, String value) {
     _headers![key] = value;
 
@@ -149,6 +141,7 @@ class ClientIO extends ClientBase with ClientMixin {
     return response;
   }
 
+  @override
   Future<Response> call(
     HttpMethod method, {
     String path = '',
@@ -157,24 +150,25 @@ class ClientIO extends ClientBase with ClientMixin {
     ResponseType? responseType,
   }) async {
     if (!_initialized) {
-      await this.init();
+      await init();
     }
 
     late http.Response res;
-    http.BaseRequest request = this.prepareRequest(
+    http.BaseRequest request = prepareRequest(
       method,
-      uri: Uri.parse(_endPoint + path + '&token=' + _token),
+      uri: Uri.parse(_endPoint + path),
       headers: {...this._headers!, ...headers},
       params: params,
     );
 
     try {
+      print(request.url);
       request = await _interceptRequest(request);
       final streamedResponse = await _httpClient.send(request);
       res = await toResponse(streamedResponse);
       res = await _interceptResponse(res);
 
-      return this.prepareResponse(
+      return prepareResponse(
         res,
         responseType: responseType,
       );

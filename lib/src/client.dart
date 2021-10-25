@@ -7,17 +7,13 @@ import 'response.dart';
 abstract class Client {
   late Map<String, String> config;
   late String _endPoint;
-  late String _token;
 
   String get endPoint => _endPoint;
 
   factory Client(
-          {String endPoint = 'http://WAWI01.PFNET.local:8080/4DAction',
-          bool selfSigned = false,
-          String token = 'ABC'}) =>
-      createClient(endPoint: endPoint, selfSigned: selfSigned, token: token);
-
-  Client setToken(String token);
+          {String endPoint = 'https://myServer.de:8080/4DAction/',
+          bool selfSigned = false}) =>
+      createClient(endPoint: endPoint, selfSigned: selfSigned);
 
   Client setSelfSigned({bool status = true});
 

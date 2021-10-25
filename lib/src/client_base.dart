@@ -4,7 +4,6 @@ import 'enums.dart';
 
 abstract class ClientBase implements Client {
   ClientBase setSelfSigned({bool status = true});
-  ClientBase setToken(String token);
   ClientBase setEndpoint(String endPoint);
   ClientBase addHeader(String key, String value);
 

@@ -8,55 +8,48 @@ import 'client_base.dart';
 
 import 'response.dart';
 
-ClientBase createClient({
-  required String endPoint,
-  required bool selfSigned,
-  required String token,
-}) =>
-    ClientBrowser(endPoint: endPoint, selfSigned: selfSigned, token: token);
+ClientBase createClient({required String endPoint, required bool selfSigned}) =>
+    ClientBrowser(endPoint: endPoint, selfSigned: selfSigned);
 
 class ClientBrowser extends ClientBase with ClientMixin {
   String _endPoint;
-  late String _token;
   Map<String, String>? _headers;
+  @override
   late Map<String, String> config;
   late BrowserClient _httpClient;
 
   ClientBrowser(
       {String endPoint = 'https://myServer.de:8080/4DAction/',
-      bool selfSigned = false,
-      String token = 'ABC'})
+      bool selfSigned = false})
       : _endPoint = endPoint {
     _httpClient = BrowserClient();
     _headers = {
       'content-type': 'application/json',
-      'x-sdk-version': 'profacto:flutter:2.0.3',
-      'X-Profacto-Response-Format': '0.11.0',
+      'Access-Control-Allow-Origin': '*'
     };
 
-    this.config = {};
+    config = {};
 
     assert(_endPoint.startsWith(RegExp("http://|https://")),
         "endPoint $_endPoint must start with 'http'");
     init();
   }
 
+  @override
   String get endPoint => _endPoint;
 
-  ClientBrowser setToken(value) {
-    this._token = value;
-    return this;
-  }
-
+  @override
   ClientBrowser setSelfSigned({bool status = true}) {
     return this;
   }
 
+  @override
   ClientBrowser setEndpoint(String endPoint) {
-    this._endPoint = endPoint;
+    _endPoint = endPoint;
     return this;
   }
 
+  @override
   ClientBrowser addHeader(String key, String value) {
     _headers![key] = value;
 
@@ -67,6 +60,7 @@ class ClientBrowser extends ClientBase with ClientMixin {
     _httpClient.withCredentials = true;
   }
 
+  @override
   Future<Response> call(
     HttpMethod method, {
     String path = '',
@@ -74,20 +68,22 @@ class ClientBrowser extends ClientBase with ClientMixin {
     Map<String, dynamic> params = const {},
     ResponseType? responseType,
   }) async {
-    await this.init();
+    await init();
 
     late http.Response res;
-    http.BaseRequest request = this.prepareRequest(
+
+    http.BaseRequest request = prepareRequest(
       method,
-      uri: Uri.parse(_endPoint + path + '&token=' + _token),
-      headers: {...this._headers!, ...headers},
+      uri: Uri.parse(_endPoint + path),
+      headers: {..._headers!, ...headers},
       params: params,
     );
     try {
+      print(request.url);
       final streamedResponse = await _httpClient.send(request);
       res = await toResponse(streamedResponse);
 
-      return this.prepareResponse(res, responseType: responseType);
+      return prepareResponse(res, responseType: responseType);
     } catch (e) {
       if (e is ProfactoException) {
         rethrow;
