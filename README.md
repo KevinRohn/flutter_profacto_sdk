@@ -1,6 +1,6 @@
 # profacto flutter SDK (unofficial)
 
-The 'flutter_profacto_sdk' is an unofficial SDK for the profacto API.
+The `flutter_profacto_sdk` is an unofficial SDK for the profacto API.
 It can be used to build flutter applications with profacto to improve business processes.
 
 See the [profacto API documentation](https://conf.extragroup.de/pages/viewpage.action?pageId=25297229) for more information.
