@@ -7,7 +7,7 @@ See the [profacto API documentation](https://conf.extragroup.de/pages/viewpage.a
 
 **Please note:**
 The name convention of the profacto database fields are mixed in german and english.
-So the naming of some variables have been adopted from the database structure... .
+So the naming of some variables has been adopted from the database structure... .
 
 ## Alpha version
 
@@ -81,7 +81,7 @@ projects.getProjectData(
   
 ```
 
--replace `<token>` with an valid token, which have `"Projekte"` rights.
+-replace `<token>` with a valid token, which has `"Projekte"` rights.
 
 ## Additional information
 
@@ -90,8 +90,8 @@ projects.getProjectData(
 
 ### Tokens
 
-There is no master token available. Tokens are bounded to specific database tables.
-profacto provides a list for the categorys of the tokens. 
+There is no master token available. Tokens are bound to specific database tables.
+profacto provides a list for the category of the tokens. 
 
 ## Reference
 

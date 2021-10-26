@@ -20,7 +20,7 @@ class Projects extends Service {
   /// Allowed tables are defined in the [table] enum.
   /// Use a comma separated list for the selected [fields]. (e.g: 'AuftragsNr,Bauvorhaben').
   ///
-  Future<void> getProjectData({
+  Future<dynamic> getProjectData({
     required ProjectTable table,
     required String fields,
     String? query,
@@ -43,6 +43,6 @@ class Projects extends Service {
     };
     final res = await client.call(HttpMethod.get,
         path: path, params: params, headers: headers);
-    print(res.data);
+    return res.data;
   }
 }
