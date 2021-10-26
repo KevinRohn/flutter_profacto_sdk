@@ -79,7 +79,6 @@ class ClientBrowser extends ClientBase with ClientMixin {
       params: params,
     );
     try {
-      print(request.url);
       final streamedResponse = await _httpClient.send(request);
       res = await toResponse(streamedResponse);
 

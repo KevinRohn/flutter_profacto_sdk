@@ -20,17 +20,21 @@ class Projects extends Service {
   /// Allowed tables are defined in the [table] enum.
   /// Use a comma separated list for the selected [fields]. (e.g: 'AuftragsNr,Bauvorhaben').
   ///
-  Future<void> getProjectData({
+  Future<models.ProfactoResponse> getProjectData({
     required ProjectTable table,
     required String fields,
     String? query,
+    int? limit,
+    int? offset,
   }) async {
-    final String path = '/api_get?/';
+    const String path = '/api_get?/';
 
     final Map<String, dynamic> params = {
       'table': EnumToString.convertToString(table),
       'fields': fields,
       'query': query,
+      'limit': (limit == null) ? 0 : limit,
+      'offset': (limit == null) ? 0 : offset,
       'token': _token,
     };
 
@@ -39,6 +43,6 @@ class Projects extends Service {
     };
     final res = await client.call(HttpMethod.get,
         path: path, params: params, headers: headers);
-    print(res.data);
+    return models.ProfactoResponse.fromJson(res.data);
   }
 }

@@ -7,7 +7,7 @@ See the [profacto API documentation](https://conf.extragroup.de/pages/viewpage.a
 
 **Please note:**
 The name convention of the profacto database fields are mixed in german and english.
-So the naming of some variables have been adopted from the database structure... .
+So the naming of some variables has been adopted from the database structure... .
 
 ## Alpha version
 
@@ -61,11 +61,47 @@ Get project data with specific query and with predefined fields:
 Projects projects = Projects(client);
 projects.setProjectsToken('<token>');
 
-projects.getProjectData(
-    table: ProjectTable.Auftrag,
-    fields: 'AuftragsNr,Bauvorhaben',
-    query: 'AuftragsNr=0000'); // get "Auftrag" by `"AuftragsNr"`
-  
+Future<ProfactoResponse> result = projects.getProjectData(
+  table: ProjectTable.Auftrag,
+  fields: 'AuftragsNr',
+  limit: 2,
+  query: ''
+);
+
+result.then((response) {
+  print(response.data['Auftrag']);
+}).catchError((error) {
+  print(error.response);
+});
+```
+
+example response:
+```JSON
+{
+  "error": "",
+  "success": true,
+  "startProcess": 434462492,
+  "responseMode": "JSON",
+  "licenseOK": true,
+  "structure_access_info": [],
+  "Auftrag": [
+    {
+      "AuftragsNr": "05104B"
+    },
+    {
+      "AuftragsNr": "06127"
+    }
+  ],
+  "records": {
+    "total_in_query": 17750,
+    "offset": 0,
+    "limit": 2,
+    "total_in_page": 2
+  },
+  "endProcess": 434462746,
+  "processingTime": 254,
+  "errorMsg": ""
+}
 ```
 
 Get all projects with predefined fields:
@@ -74,14 +110,21 @@ Get all projects with predefined fields:
 Projects projects = Projects(client);
 projects.setProjectsToken('<token>');
 
-projects.getProjectData(
-    table: ProjectTable.Auftrag,
-    fields: 'AuftragsNr,Bauvorhaben'
-    ); 
-  
+Future<ProfactoResponse> result = projects.getProjectData(
+  table: ProjectTable.Auftrag,
+  fields: 'AuftragsNr,Bauvorhaben'
+);
+
+result.then((response) {
+  print(response.data['Auftrag']);
+}).catchError((error) {
+  print(error.response);
+});
 ```
 
--replace `<token>` with an valid token, which have `"Projekte"` rights.
+
+
+-replace `<token>` with a valid token, which has `"Projekte"` rights.
 
 ## Additional information
 
@@ -90,28 +133,28 @@ projects.getProjectData(
 
 ### Tokens
 
-There is no master token available. Tokens are bounded to specific database tables.
-profacto provides a list for the categorys of the tokens. 
+There is no master token available. Tokens are bound to specific database tables.
+profacto provides a list for the category of the tokens. 
 
 ## Reference
 
-### ['API - Dateien'](https://conf.extragroup.de/display/handbuch/API+-+Dateien)
-
-### ['API - Kunden'](https://conf.extragroup.de/display/handbuch/API+-+Kunden)
-### ['API - Projekte'](https://conf.extragroup.de/display/handbuch/API+-+Projekte)
+### API - Projekte
 
 - Requires API-token `"Projekte"`
+- Documentation link profacto - [API - Projekte](https://conf.extragroup.de/display/handbuch/API+-+Projekte)
 
-| API call                      |       State        | Description                                |
-| :---------------------------- | :----------------: | :----------------------------------------- |
-| 'api_get'                     | :white_check_mark: |  |
-| 'api_get_qr'                  |        :x:         |    |
-| 'api_put_project'             |        :x:         |    |
-| 'api_put_projectpos'          |        :x:         |    |
-| 'api_getposdelta'             |        :x:         |     |
-| 'api_get_project_doccopylist' |        :x:         |    |
-| 'api_get_project_filelist'    |        :x:         |    |
+| API call                      |       State        | Description |
+| :---------------------------- | :----------------: | :---------- |
+| 'api_get'                     | :white_check_mark: |             |
+| 'api_get_qr'                  |        :x:         |             |
+| 'api_put_project'             |        :x:         |             |
+| 'api_put_projectpos'          |        :x:         |             |
+| 'api_getposdelta'             |        :x:         |             |
+| 'api_get_project_doccopylist' |        :x:         |             |
+| 'api_get_project_filelist'    |        :x:         |             |
 
+### ['API - Dateien'](https://conf.extragroup.de/display/handbuch/API+-+Dateien)
+### ['API - Kunden'](https://conf.extragroup.de/display/handbuch/API+-+Kunden)
 ### ['API - Produktion'](https://conf.extragroup.de/display/handbuch/API+-+Produktion)
 ### ['API - Allgemein'](https://conf.extragroup.de/display/handbuch/API+-+Allgemein)
 ### ['API - Artikel'](https://conf.extragroup.de/display/handbuch/API+-+Artikel)

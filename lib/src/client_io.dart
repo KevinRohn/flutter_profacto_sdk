@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:cookie_jar/cookie_jar.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -24,9 +26,11 @@ class ClientIO extends ClientBase with ClientMixin {
   bool _initialized = false;
   late http.Client _httpClient;
   late HttpClient _nativeClient;
+  late CookieJar _cookieJar;
   List<Interceptor> _interceptors = [];
 
   bool get initialized => _initialized;
+  CookieJar get cookieJar => _cookieJar;
 
   ClientIO(
       {String endPoint = 'https://myServer.de:8080/4DAction/',
@@ -74,9 +78,10 @@ class ClientIO extends ClientBase with ClientMixin {
   }
 
   Future init() async {
+    // if web skip cookie implementation and origin header as those are automatically handled by browsers
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     addHeader('Origin',
-        'appwrite-${Platform.operatingSystem}://${packageInfo.packageName}');
+        'profacto-${Platform.operatingSystem}://${packageInfo.packageName}');
 
     //creating custom user agent
     DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
@@ -162,7 +167,6 @@ class ClientIO extends ClientBase with ClientMixin {
     );
 
     try {
-      print(request.url);
       request = await _interceptRequest(request);
       final streamedResponse = await _httpClient.send(request);
       res = await toResponse(streamedResponse);
