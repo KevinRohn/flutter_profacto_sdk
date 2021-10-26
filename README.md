@@ -61,11 +61,47 @@ Get project data with specific query and with predefined fields:
 Projects projects = Projects(client);
 projects.setProjectsToken('<token>');
 
-projects.getProjectData(
-    table: ProjectTable.Auftrag,
-    fields: 'AuftragsNr,Bauvorhaben',
-    query: 'AuftragsNr=0000'); // get "Auftrag" by `"AuftragsNr"`
-  
+Future<ProfactoResponse> result = projects.getProjectData(
+  table: ProjectTable.Auftrag,
+  fields: 'AuftragsNr',
+  limit: 2,
+  query: ''
+);
+
+result.then((response) {
+  print(response.data['Auftrag']);
+}).catchError((error) {
+  print(error.response);
+});
+```
+
+example response:
+```JSON
+{
+  "error": "",
+  "success": true,
+  "startProcess": 434462492,
+  "responseMode": "JSON",
+  "licenseOK": true,
+  "structure_access_info": [],
+  "Auftrag": [
+    {
+      "AuftragsNr": "05104B"
+    },
+    {
+      "AuftragsNr": "06127"
+    }
+  ],
+  "records": {
+    "total_in_query": 17750,
+    "offset": 0,
+    "limit": 2,
+    "total_in_page": 2
+  },
+  "endProcess": 434462746,
+  "processingTime": 254,
+  "errorMsg": ""
+}
 ```
 
 Get all projects with predefined fields:
@@ -74,12 +110,19 @@ Get all projects with predefined fields:
 Projects projects = Projects(client);
 projects.setProjectsToken('<token>');
 
-projects.getProjectData(
-    table: ProjectTable.Auftrag,
-    fields: 'AuftragsNr,Bauvorhaben'
-    ); 
-  
+Future<ProfactoResponse> result = projects.getProjectData(
+  table: ProjectTable.Auftrag,
+  fields: 'AuftragsNr,Bauvorhaben'
+);
+
+result.then((response) {
+  print(response.data['Auftrag']);
+}).catchError((error) {
+  print(error.response);
+});
 ```
+
+
 
 -replace `<token>` with a valid token, which has `"Projekte"` rights.
 
