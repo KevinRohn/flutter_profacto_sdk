@@ -12,3 +12,5 @@ enum ProjectTable {
   KalkBereiche,
   KalkGruppen
 }
+
+enum OrdersTable { Bestellung, BestellPos }

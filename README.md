@@ -141,7 +141,7 @@ profacto provides a list for the category of the tokens.
 ### API - Projekte
 
 - Requires API-token `"Projekte"`
-- Documentation link profacto - [API - Projekte](https://conf.extragroup.de/display/handbuch/API+-+Projekte)
+- Documentation link profacto [API - Projekte](https://conf.extragroup.de/display/handbuch/API+-+Projekte)
 
 | API call                      |       State        | Description |
 | :---------------------------- | :----------------: | :---------- |
@@ -153,6 +153,17 @@ profacto provides a list for the category of the tokens.
 | 'api_get_project_doccopylist' |        :x:         |             |
 | 'api_get_project_filelist'    |        :x:         |             |
 
+### API - Bestellung
+
+- Requires API-token `"Bestellung"`
+- Documentation link profacto ['API - Bestellung'](https://conf.extragroup.de/display/handbuch/API+-+Bestellung)
+
+| API call             |       State        | Description |
+| :------------------- | :----------------: | :---------- |
+| 'api_get'            | :white_check_mark: |             |
+| 'api_put_bestellung' |        :x:         |             |
+| 'api_put_bestellpos' | :white_check_mark: |             |
+
 ### ['API - Dateien'](https://conf.extragroup.de/display/handbuch/API+-+Dateien)
 ### ['API - Kunden'](https://conf.extragroup.de/display/handbuch/API+-+Kunden)
 ### ['API - Produktion'](https://conf.extragroup.de/display/handbuch/API+-+Produktion)
@@ -161,7 +172,6 @@ profacto provides a list for the category of the tokens.
 ### ['API - Lieferanten'](https://conf.extragroup.de/display/handbuch/API+-+Lieferanten)
 ### ['API - Lager'](https://conf.extragroup.de/display/handbuch/API+-+Lager)
 ### ['API - Zeiterfassung'](https://conf.extragroup.de/display/handbuch/API+-+Zeiterfassung)
-### ['API - Bestellung'](https://conf.extragroup.de/display/handbuch/API+-+Bestellung)
 ### ['API - Aktivitäten'](https://conf.extragroup.de/pages/viewpage.action?pageId=105612059)
 ### ['API - Personal'](https://conf.extragroup.de/display/handbuch/API+-+Personal)
 ### ['API - Kontakte'](https://conf.extragroup.de/display/handbuch/API+-+Kontakte)
