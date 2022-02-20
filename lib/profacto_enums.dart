@@ -14,3 +14,5 @@ enum ProjectTable {
 }
 
 enum OrdersTable { Bestellung, BestellPos }
+
+enum ArticlesTable { Artikel }
