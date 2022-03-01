@@ -38,10 +38,10 @@ class Orders extends Service {
     return models.ProfactoResponse.fromJson(res.data);
   }
 
-  Future<models.ProfactoResponse> setOrderPositionAutoAppend(
+  Future<models.ProfactoPutResponse> setOrderPositionAutoAppend(
       {required String orderNote,
       required String articleId,
-      required int amount}) async {
+      required double amount}) async {
     const String path = '/api_put_bestellpos?/';
     final Map<String, String> headers = {
       'content-type': 'application/json',
@@ -60,6 +60,6 @@ class Orders extends Service {
     final res = await client.call(HttpMethod.get,
         path: path, params: params, headers: headers);
 
-    return res.data;
+    return models.ProfactoPutResponse.fromJson(res.data);
   }
 }
