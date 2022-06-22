@@ -41,7 +41,8 @@ class Orders extends Service {
   Future<models.ProfactoPutResponse> setOrderPositionAutoAppend(
       {required String orderNote,
       required String articleId,
-      required double amount}) async {
+      required double amount,
+      required String creationDate}) async {
     const String path = '/api_put_bestellpos?/';
     final Map<String, String> headers = {
       'content-type': 'application/json',
@@ -55,7 +56,8 @@ class Orders extends Service {
       'LfdNr': 0,
       'BestellMenge': amount,
       'ArtikelNr': articleId,
-      'Bemerkung': orderNote
+      'Bemerkung': orderNote,
+      'CreationDate': creationDate
     };
     final res = await client.call(HttpMethod.get,
         path: path, params: params, headers: headers);
