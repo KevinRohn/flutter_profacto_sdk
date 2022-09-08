@@ -15,4 +15,6 @@ enum ProjectTable {
 
 enum OrdersTable { Bestellung, BestellPos }
 
+enum ContactsTable { Kunden, Ansprechpartner }
+
 enum ArticlesTable { Artikel }

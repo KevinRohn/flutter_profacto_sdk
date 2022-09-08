@@ -18,4 +18,5 @@ part 'services/production.dart';
 part 'services/projects.dart';
 part 'services/orders.dart';
 part 'services/articles.dart';
+part 'services/contacts.dart';
 part 'profacto_enums.dart';
